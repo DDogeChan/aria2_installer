@@ -35,8 +35,8 @@ function setting(){
 	cp aria2.conf caddy.conf aria2.sh auto_tracker.sh /data/aria2
 	
 	echo "-------------------------------"
-	read -p "设置用户名：" user
-	read -p "设置密码：" pass
+	user="doge"
+	pass="qwejkl"
 	echo "-------------------------------"
 	sed -i "s/rpc-secret=/rpc-secret=${pass}/g" /data/aria2/aria2.conf
 	#下载yaaw
@@ -65,14 +65,10 @@ function setting(){
 	echo "密码：${pass}"
 	echo "RPC地址：http://token:${pass}@$1:6800/jsonrpc"
 	echo "是否添加定时任务，自动更新tracker?（可提高磁力下载速度，每天服务器0点重启aria2，对正在下载的任务有影响！！！）[y/n]"
-	read -p ":" auto_trace
+
     	#添加定时任务，自动更新tracker
-	if [ "$a" = "y" ]
-	then
-    		echo "0 0 * * * sh /data/aria2/auto_tracker.sh" >> /var/spool/cron/root
-	else
-		echo "后续可手动运行更新tracker sh /data/aria2/auto_tracker.sh"
-	fi
+    	echo "0 0 * * * sh /data/aria2/auto_tracker.sh" >> /var/spool/cron/root
+	
 	
 	#一点点清理工作
 	rm -rf /data/aria2/*.zip
@@ -113,7 +109,7 @@ echo "2) CentOS 6 X64"
 echo "3) Debian 8+ X64 or Ubuntu 14+ X64"
 echo "q) 退出"
 echo '----------------------------------'
-read -p ":" num
+num=1
 echo '----------------------------------'
 
 case $num in
